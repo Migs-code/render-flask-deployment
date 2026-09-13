@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            🎓 <span>SchoolSystem</span>
+        </div>
+
+        <nav>
+
+            <a href="/admin" class="active">
+                📊 Dashboard
+            </a>
+
+            <a href="/admin">
+                👨‍🎓 Students
+            </a>
+
+            <a href="/admin">
+                👨‍🏫 Teachers
+            </a>
+
+            <a href="/admin">
+                📚 Courses
+            </a>
+
+            <a href="/admin">
+                📝 Grades
+            </a>
+
+        </nav>
+
+        <a href="/logout" class="logout">
+            🚪 Logout
+        </a>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+                <h1>Admin Dashboard</h1>
+                <p>Welcome back, Admin</p>
+            </div>
+
+            <div class="profile">
+                👤 Admin
+            </div>
+
+        </header>
+
+
+        <section class="cards">
+
+            <div class="card blue">
+
+                <div class="card-icon">
+                    👨‍🎓
+                </div>
+
+                <div>
+                    <p>Total Students</p>
+                    <h2>{{ student_count }}</h2>
+                </div>
+
+            </div>
+
+
+            <div class="card purple">
+
+                <div class="card-icon">
+                    👨‍🏫
+                </div>
+
+                <div>
+                    <p>Total Teachers</p>
+                    <h2>{{ teacher_count }}</h2>
+                </div>
+
+            </div>
+
+
+            <div class="card green">
+
+                <div class="card-icon">
+                    📚
+                </div>
+
+                <div>
+                    <p>Courses</p>
+                    <h2>8</h2>
+                </div>
+
+            </div>
+
+
+            <div class="card orange">
+
+                <div class="card-icon">
+                    📝
+                </div>
+
+                <div>
+                    <p>Grades</p>
+                    <h2>24</h2>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <h2>Add Student</h2>
+
+            </div>
+
+            <form action="/add_student"
+                  method="POST"
+                  class="student-form">
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Student name"
+                    required
+                >
+
+                <input
+                    type="number"
+                    name="age"
+                    placeholder="Age"
+                    required
+                >
+
+                <input
+                    type="text"
+                    name="course"
+                    placeholder="Course"
+                    required
+                >
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    required
+                >
+
+                <button type="submit">
+                    + Add Student
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <h2>Students</h2>
+
+                <span>
+                    {{ student_count }} students
+                </span>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Course</th>
+                            <th>Email</th>
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for student in students %}
+
+                        <tr>
+
+                            <td>#{{ student.id }}</td>
+
+                            <td>
+
+                                <div class="student-name">
+                                    {{ student.name }}
+                                </div>
+
+                            </td>
+
+                            <td>
+                                {{ student.age }}
+                            </td>
+
+                            <td>
+
+                                <span class="badge">
+                                    {{ student.course }}
+                                </span>
+
+                            </td>
+
+                            <td>
+                                {{ student.email }}
+                            </td>
+
+                            <td>
+
+                                <a
+                                    href="/delete_student/{{ student.id }}"
+                                    class="delete"
+                                    onclick="return confirm('Delete this student?')"
+                                >
+                                    Delete
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% else %}
+
+                        <tr>
+
+                            <td colspan="6"
+                                class="empty">
+
+                                No students yet.
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <h2>System Users</h2>
+
+            </div>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Role</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for user in users %}
+
+                        <tr>
+
+                            <td>#{{ user.id }}</td>
+
+                            <td>{{ user.username }}</td>
+
+                            <td>
+
+                                <span class="role {{ user.role }}">
+                                    {{ user.role }}
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

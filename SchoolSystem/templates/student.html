@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            🎓 <span>SchoolSystem</span>
+        </div>
+
+        <nav>
+
+            <a href="/student" class="active">
+                📊 Dashboard
+            </a>
+
+            <a href="/student">
+                👤 My Profile
+            </a>
+
+            <a href="/student">
+                📚 My Courses
+            </a>
+
+            <a href="/student">
+                📝 My Grades
+            </a>
+
+            <a href="/student">
+                📅 Schedule
+            </a>
+
+        </nav>
+
+        <a href="/logout" class="logout">
+            🚪 Logout
+        </a>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>Student Dashboard</h1>
+
+                <p>
+                    Welcome back, {{ username }}
+                </p>
+
+            </div>
+
+            <div class="profile">
+                👨‍🎓 {{ username }}
+            </div>
+
+        </header>
+
+
+        <section class="welcome">
+
+            <div>
+
+                <h2>
+                    Welcome, {{ username }}! 👋
+                </h2>
+
+                <p>
+                    Here's an overview of your school account.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="cards">
+
+            <div class="card blue">
+
+                <div class="card-icon">
+                    📚
+                </div>
+
+                <div>
+
+                    <p>My Courses</p>
+
+                    <h2>6</h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="card green">
+
+                <div class="card-icon">
+                    📊
+                </div>
+
+                <div>
+
+                    <p>Average Grade</p>
+
+                    <h2>89%</h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="card purple">
+
+                <div class="card-icon">
+                    📅
+                </div>
+
+                <div>
+
+                    <p>Classes</p>
+
+                    <h2>5</h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="card orange">
+
+                <div class="card-icon">
+                    📝
+                </div>
+
+                <div>
+
+                    <p>Assignments</p>
+
+                    <h2>3</h2>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <h2>My Information</h2>
+
+            </div>
+
+            <div class="profile-info">
+
+                <div>
+
+                    <span>Username</span>
+                    <strong>{{ username }}</strong>
+
+                </div>
+
+                <div>
+
+                    <span>Role</span>
+
+                    <strong>
+                        Student
+                    </strong>
+
+                </div>
+
+                <div>
+
+                    <span>Status</span>
+
+                    <strong class="status">
+                        Active
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>
